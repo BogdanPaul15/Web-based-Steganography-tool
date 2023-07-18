@@ -1,0 +1,49 @@
+<!-- Extends to base template -->
+{% extends "_base.html" %}
+<!-- Content of the encoding page -->
+{% block content %}
+  <h1 class="main-title">Encode</h1>
+  <!-- Information about the encoding process -->
+  <p class="alert alert-info text-justify">
+    To encode a message into an image, choose the image you want to use (it must be <strong>.PNG</strong>), enter your text and hit the <strong>Encode</strong> button. <br/>
+    Remember, the more text you want to hide, the larger the image has to be. In case you chose an image that is too small to hold your message you will be informed. <br /><br />
+    <strong>Attention!</strong> Please do not enter diacritics of any kind because this will blow up the process. Thanks. :)
+  </p>
+  <!-- Encoding form -->
+  <form method="post" enctype="multipart/form-data">
+    <!-- Display error message in case of invalid image format (not .PNG) -->
+    {% if error_msg %}
+      <div style="color: red;">{{ error_msg }}</div>
+    {% endif %}
+    <!-- The message you want to encode -->
+    <div class="mb-3">
+      <label for="message" class="form-label bold"><b>Message</b></label>
+      <textarea type="text" class="form-control" name="message" id="message" rows="3" required></textarea>
+    </div>
+    <!-- The image in which you want to encode the message (NOTE: It must be .PNG) -->
+    <div class="mb-3">
+      <label for="files"><b>Select image to encode</b></label>
+      <input type="file" name="files" id="files" multiple required/>
+    </div>
+    <button type="submit" class="btn btn-primary">Encode</button>
+  </form><br />
+  <!-- Succes message -->
+  <div style="color: green;">{{ succes }}</div><br />
+  <!-- Displaying the last encoded image -->
+  <div class="mb-5" id="last">
+    <p>
+      <b>Last image encoded:</b>
+    </p>
+    <div class="text-center">
+      <img class="img-fluid" src="../public/images/encoded_image.png" id="image" alt="Last encoded image" />
+    </div>
+  </div>
+  <script>
+    // Display the last encoded image only if it exists
+    var image = document.getElementById('image');
+    var last = document.getElementById('last')
+    image.onerror = function() {
+      last.style.display = 'none';
+    };
+  </script>
+{% endblock %}

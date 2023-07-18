@@ -1,0 +1,34 @@
+<!-- Extends to base template -->
+{% extends "_base.html" %}
+<!-- Content of the encoding page -->
+{% block content %}
+  <h1 class="main-title">Decode</h1>
+  <!-- Information about the decoding process -->
+  <p class="alert alert-info text-justify">
+    To decode a hidden message from an image, just choose an image (it must be a <strong>.PNG</strong>) and hit the <strong>Decode</strong> button.<br><br>
+  </p>
+  <!-- Decoding form -->
+  <form method="post" enctype="multipart/form-data">
+    <!-- Display error message in case of invalid image format (not .PNG) -->
+    {% if error_msg %}
+      <div style="color: red;">{{ error_msg }}</div>
+    {% endif %}
+    <!-- The image you want to decode (NOTE: It must be .PNG) -->
+    <div class="mb-3">
+      <label for="files"><b>Select image to decode</b></label>
+      <input type="file" name="files" id="files" multiple required/>
+    </div>
+    <button type="submit" class="btn btn-primary">Decode</button>
+  </form><br />
+  <!-- Succes message -->
+  <div style="color: green;">{{ succes }}</div><br />
+  <!-- Displaying the last decoded message -->
+  {% if res %}
+    <div class="mb-5">
+      <p>
+        <b>Last message decoded:</b>
+      </p>
+      <p class="border border-dark p-3" style="text-align: justify;">{{  res }}</p>
+    </div>
+  {% endif %}
+{% endblock %}

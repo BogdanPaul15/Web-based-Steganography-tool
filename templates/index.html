@@ -1,0 +1,11 @@
+<!-- Extends to base template -->
+{% extends "_base.html" %}
+{% block content %}
+    <div class="content-box main-content">
+        <h1 class="main-title">Homepage</h1>
+        <p class="p-style"><strong>Steganography</strong> is the practice of concealing information within another message or physical object to avoid detection. Steganography can be used to hide virtually any type of digital content, including text, image, video, or audio content. That hidden data is then extracted at its destination.</p>
+        <p>In this web application, you will be able to encode messages into any <strong>.PNG</strong> image and decode it afterwards.</p>
+        <a href="/encode" class="link-primary">Encode</a>
+        <a href="/decode" class="link-primary" style="float:right">Decode</a>
+    </div>
+{% endblock %}
